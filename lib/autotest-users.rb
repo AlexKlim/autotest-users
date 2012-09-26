@@ -20,12 +20,16 @@ module Autotest
 
       first_name = /[:first_name:]/.gen
       last_name = /[:last_name:]/.gen
+      first_name.gsub!("'",'')
+      last_name.gsub!("'",'')
 
       $users[name]['first_name'] = first_name
       $users[name]['last_name'] = last_name
       email = Autotest.email.split('@')
       $users[name]['email'] = "%s+%s%s@%s" % [email[0], first_name.downcase, last_name.downcase, email[1]]
       $users[name]['password'] = Autotest.password
+
+      return $user[name]
     end
 
     def get_user(name)
@@ -34,6 +38,7 @@ module Autotest
 
     def set_user_data(name, type, data)
       $users[name][type] = data
+      return data
     end
 
     def get_user_data(name, type)
@@ -43,9 +48,9 @@ module Autotest
     def set_current(name)
       $current ||= Hash.new
       if ((name != 'anonymous') or (name != 'anonim'))
-	$current['first_name'] = @users[name]['first_name']
-	$current['email'] = @users[name]['email']
-	$current['password'] = @users[name]['password']
+	$current['first_name'] = $users[name]['first_name']
+	$current['email'] = $users[name]['email']
+	$current['password'] = $users[name]['password']
       else
 	$current['first_name'] = 'anonymous'
 	$current['email'] = 'anonymous'
@@ -55,6 +60,10 @@ module Autotest
 
     def get_current(type)
       $current[type]
+    end
+
+    def user_create?(name)
+      $users[name] != nil ? true : false
     end
 
   end
