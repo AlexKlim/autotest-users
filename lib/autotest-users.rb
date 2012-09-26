@@ -34,7 +34,7 @@ module Autotest
 
     def get_user(name)
       if ($users == nil) or ($users[name] == nil) 
-	raise "<#Autotest::Users> User #{name.colorize(:red)} doesn't exist." 
+	raise "<#Autotest::Users> User #{name} doesn't exist." 
       end
 
       $users[name]
@@ -48,7 +48,7 @@ module Autotest
     def get_user_data(name, type)
       user = get_user(name)
       if user[type] == nil
-	raise "<#Autotest::Users> The '#{type.colorize(:red)}' doesn't exist for '#{name.colorize(:red)}' user"
+	raise "<#Autotest::Users> The '#{type}' doesn't exist for '#{name}' user"
       end
       user[type]
     end
@@ -72,7 +72,7 @@ module Autotest
 
     def get_current(type)
       if ($current == nil) or ($current[type] == nil)
-	raise "<#Autotest::Users> You doesn't set current user or '#{type.colorize(:red)}' doesn't exist fot the current user."
+	raise "<#Autotest::Users> You doesn't set current user or '#{type}' doesn't exist fot the current user."
       end
       $current[type]
     end
