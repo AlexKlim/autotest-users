@@ -1,6 +1,17 @@
 # Autotest::Users
 
-TODO: Write a gem description
+This is a gem to help you work with users in your auto-tests. Create users, update any params and etc. Users are saved in Hash (not in a databases). Because, not needed save users on a long time. When auto-test is starting, new Hash will be created. After finishing User-Hash will be destroyed. Preferably, use the gem with cucumber. 
+
+User-Hash example: 
+
+    {"user_name" => {"first_name" => "Alex", "last_name" => "Klim", "email" => "email+alexklim@example.com", "password" => "password"}}
+
+user_name - this is a name, which you use in a cucumber features;
+first_name - generate automatically;
+last_name - generate automatically;
+email - your email + (first and last name) @ example.com
+password - password for email 
+
 
 ## Installation
 
@@ -16,9 +27,74 @@ Or install it yourself as:
 
     $ gem install autotest-users
 
-## Usage
+## Usage with cucumber
 
-TODO: Write usage instructions here
+In features/env.rb file please add:
+
+    require 'autotest-users'
+    include Autotest::Users
+
+We should change default email and password for your users. We can add follow lines in features/env.rb file:
+
+    Autotest.configure do |config|
+      config.email = <Email For Users> # default: email@example.com
+      config.password = <Password for Emails> # default: password
+    end
+
+### Methods
+
+    create_user(name)
+
+Create user with name, and basic params: first_name, last_name, email, password.
+
+    get_user(name)
+
+Find user by 'name' and return this hash
+
+    set_user_data(name, type, data)
+
+Find user by name and set new :key => :value into the hash.
+
+    get_user_data(name, type)
+
+Find user by name and returned value from hash by type ('type' as key for hash).
+
+    set_current(name)
+
+We can set current user. User which used at the moment.
+
+    get_current(type)
+
+Get value from current user by 'type'.
+
+    user_created?(name)
+
+Check created or not user with the name, return 'true' or 'false'.
+
+### Example
+
+    $ create_user('alex')
+    => {"alex" => {"first_name"=>"Murray", "last_name"=>"Hilpert", "email"=>"email+murrayhilpert@example.com", "password"=>"password"}}
+    
+    $ get_user('alex')
+    => {"first_name"=>"Murray", "last_name"=>"Hilpert", "email"=>"email+murrayhilpert@example.com", "password"=>"password"}
+
+    $ set_user_data('alex', 'phone', '+1234567')
+    => "+1234567"
+
+    $ get_user_data('alex', 'email')
+    => "email+murrayhilpert@example.com"
+
+    $ set_curent('alex')
+    get_current('first_name')
+    => "Murray"
+
+    $ user_created?('alex')
+    => true
+
+    $ u = get_user('alex')
+    $ u['last_name']
+    => "Hilpert"
 
 ## Contributing
 
