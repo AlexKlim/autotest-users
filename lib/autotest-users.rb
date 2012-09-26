@@ -29,7 +29,7 @@ module Autotest
       $users[name]['email'] = "%s+%s%s@%s" % [email[0], first_name.downcase, last_name.downcase, email[1]]
       $users[name]['password'] = Autotest.password
 
-      return $user[name]
+      return $users[name]
     end
 
     def get_user(name)
@@ -62,8 +62,8 @@ module Autotest
       $current[type]
     end
 
-    def user_create?(name)
-      $users[name] != nil ? true : false
+    def user_created?(name)
+      ($users and $users[name]) != nil ? true : false
     end
 
   end
