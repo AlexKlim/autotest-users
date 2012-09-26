@@ -7,9 +7,13 @@ User-Hash example:
     {"user_name" => {"first_name" => "Alex", "last_name" => "Klim", "email" => "email+alexklim@example.com", "password" => "password"}}
 
 user_name - this is a name, which you use in a cucumber features;
+
 first_name - generate automatically;
+
 last_name - generate automatically;
+
 email - your email + (first and last name) @ example.com
+
 password - password for email 
 
 
