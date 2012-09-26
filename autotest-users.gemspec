@@ -14,6 +14,8 @@ Gem::Specification.new do |gem|
   gem.name          = "autotest-users"
   gem.require_paths = ["lib"]
   gem.version       = Autotest::Users::VERSION
+
   gem.add_dependency("randexp")
+  gem.add_dependency("colorize")
 
 end

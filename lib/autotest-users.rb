@@ -33,6 +33,10 @@ module Autotest
     end
 
     def get_user(name)
+      if ($users == nil) or ($users[name] == nil) 
+	raise "<#Autotest::Users> User #{name.colorize(:red)} doesn't exist." 
+      end
+
       $users[name]
     end
 
@@ -42,12 +46,20 @@ module Autotest
     end
 
     def get_user_data(name, type)
-      $users[name][type]
+      user = get_user(name)
+      if user[type] == nil
+	raise "<#Autotest::Users> The '#{type.colorize(:red)}' doesn't exist for '#{name.colorize(:red)}' user"
+      end
+      user[type]
     end
 
     def set_current(name)
       $current ||= Hash.new
-      if ((name != 'anonymous') or (name != 'anonim'))
+      if ((name != 'anonymous') and (name != 'anonim'))
+	if $users == nil 
+	  raise "<#Autotest::Users> You should use create_user method, before set_current method."
+	end
+
 	$current['first_name'] = $users[name]['first_name']
 	$current['email'] = $users[name]['email']
 	$current['password'] = $users[name]['password']
@@ -59,6 +71,9 @@ module Autotest
     end
 
     def get_current(type)
+      if ($current == nil) or ($current[type] == nil)
+	raise "<#Autotest::Users> You doesn't set current user or '#{type.colorize(:red)}' doesn't exist fot the current user."
+      end
       $current[type]
     end
 
