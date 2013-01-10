@@ -80,6 +80,10 @@ module Autotest
     def user_created?(name)
       ($users and $users[name]) != nil ? true : false
     end
+    
+    def all_users
+      $users
+    end
 
   end
 end
