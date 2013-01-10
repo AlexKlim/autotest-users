@@ -29,12 +29,12 @@ module Autotest
       $users[name]['email'] = "%s+%s%s@%s" % [email[0], first_name.downcase, last_name.downcase, email[1]]
       $users[name]['password'] = Autotest.password
 
-      return $users[name]
+      $users[name]
     end
 
     def get_user(name)
-      if ($users == nil) or ($users[name] == nil) 
-	raise "<#Autotest::Users> User #{name} doesn't exist." 
+      if ($users.nil?) or ($users[name].nil?) 
+        raise "<#Autotest::Users> User #{name} doesn't exist." 
       end
 
       $users[name]
@@ -42,13 +42,13 @@ module Autotest
 
     def set_user_data(name, type, data)
       $users[name][type] = data
-      return data
+      data
     end
 
     def get_user_data(name, type)
       user = get_user(name)
-      if user[type] == nil
-	raise "<#Autotest::Users> The '#{type}' doesn't exist for '#{name}' user"
+      if user[type]nil?
+        raise "<#Autotest::Users> The '#{type}' doesn't exist for '#{name}' user"
       end
       user[type]
     end
@@ -56,29 +56,28 @@ module Autotest
     def set_current(name)
       $current ||= Hash.new
       if ((name != 'anonymous') and (name != 'anonim'))
-	if $users == nil 
-	  raise "<#Autotest::Users> You should use create_user method, before set_current method."
-	end
-
-	$current['first_name'] = $users[name]['first_name']
-	$current['email'] = $users[name]['email']
-	$current['password'] = $users[name]['password']
+        if $users.nil?
+          raise "<#Autotest::Users> You should use create_user method, before set_current method."
+        end
+        $current['first_name'] = $users[name]['first_name']
+        $current['email'] = $users[name]['email']
+        $current['password'] = $users[name]['password']
       else
-	$current['first_name'] = 'anonymous'
-	$current['email'] = 'anonymous'
-	$current['password'] = 'anonymous'
+        $current['first_name'] = 'anonymous'
+        $current['email'] = 'anonymous'
+        $current['password'] = 'anonymous'
       end
     end
 
     def get_current(type)
-      if ($current == nil) or ($current[type] == nil)
-	raise "<#Autotest::Users> You doesn't set current user or '#{type}' doesn't exist fot the current user."
+      if ($current.nil?) or ($current[type].nil?)
+        raise "<#Autotest::Users> You doesn't set current user or '#{type}' doesn't exist fot the current user."
       end
       $current[type]
     end
 
     def user_created?(name)
-      ($users and $users[name]) != nil ? true : false
+      if ($users and $users[name]).nil? then true else false end
     end
     
     def all_users
