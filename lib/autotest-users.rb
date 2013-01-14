@@ -47,7 +47,7 @@ module Autotest
 
     def get_user_data(name, type)
       user = get_user(name)
-      if user[type]nil?
+      if user[type].nil?
         raise "<#Autotest::Users> The '#{type}' doesn't exist for '#{name}' user"
       end
       user[type]
@@ -77,7 +77,7 @@ module Autotest
     end
 
     def user_created?(name)
-      if ($users and $users[name]).nil? then true else false end
+      ($users and $users[name]).nil? ? false : true
     end
     
     def all_users
