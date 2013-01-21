@@ -40,9 +40,10 @@ module Autotest
       @@users[name]
     end
 
-    def set_user_data(name, type, data)
-      @@users[name][type.to_sym] = data
-      data
+    def set_user_data(name, options = {})
+      options.each do |key, value|
+        @@users[name][key.to_sym] = value
+      end
     end
 
     def get_user_data(name, type)
