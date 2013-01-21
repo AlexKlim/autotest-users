@@ -1,4 +1,4 @@
-#require "autotest-users/version"
+require "autotest-users/version"
 
 module Autotest
 
@@ -44,6 +44,7 @@ module Autotest
       options.each do |key, value|
         $users[name][key.to_sym] = value
       end
+      options.value.first
     end
 
     def get_user_data(name, type)
