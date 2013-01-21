@@ -44,7 +44,7 @@ module Autotest
       options.each do |key, value|
         $users[name][key.to_sym] = value
       end
-      options.value.first
+      options.values.first
     end
 
     def get_user_data(name, type)
