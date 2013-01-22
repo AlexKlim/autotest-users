@@ -50,6 +50,7 @@ module Autotest
     def get_user_data(name, type)
       user = get_user(name)
       type = type.to_sym
+      return "#{user[:first_name]} #{user[:last_name]}" if type == :name
       if user[type].nil?
         raise "<#Autotest::Users> The '#{type}' doesn't exist for '#{name}' user"
       end
