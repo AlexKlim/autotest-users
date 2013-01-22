@@ -25,9 +25,10 @@ module Autotest
 
       $users[name][:first_name] = first_name
       $users[name][:last_name] = last_name
+      $users[name][:full_name] = "#{first_name} #{last_name}"
       email = Autotest.email.split('@')
       $users[name][:email] = "%s+%s%s@%s" % [email[0], first_name.downcase, last_name.downcase, email[1]]
-      $users[name][:password] = Autotest.password
+      $users[name][:password] = Autotest.password      
 
       $users[name]
     end
@@ -50,7 +51,6 @@ module Autotest
     def get_user_data(name, type)
       user = get_user(name)
       type = type.to_sym
-      return "#{user[:first_name]} #{user[:last_name]}" if type == :name
       if user[type].nil?
         raise "<#Autotest::Users> The '#{type}' doesn't exist for '#{name}' user"
       end
