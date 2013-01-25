@@ -80,10 +80,10 @@ Check created or not user with the name, return 'true' or 'false'.
 ### Example
 
     $ create_user('alex')
-    => {"alex" => {"first_name"=>"Murray", "last_name"=>"Hilpert", "email"=>"email+murrayhilpert@example.com", "password"=>"password"}}
+    => {"alex" => {first_name: "Murray", last_name: "Hilpert", full_name: "Murray Hilpert", email: "email+murrayhilpert@example.com", password: "password"}}
     
     $ get_user('alex')
-    => {"first_name"=>"Murray", "last_name"=>"Hilpert", "email"=>"email+murrayhilpert@example.com", "password"=>"password"}
+    => {first_name: "Murray", last_name: "Hilpert", full_name: "Murray Hilpert", email: "email+murrayhilpert@example.com", password: "password"}
 
     $ set_user_data('alex', phone: '+1234567')
     => "+1234567"
