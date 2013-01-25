@@ -4,7 +4,7 @@ This is a gem to help you work with users in your auto-tests. Create users, upda
 
 User-Hash example: 
 
-    {"user_name" => {first_name: "Alex", last_name: "Klim", ful_name: "Alex Klim", email: "email+alexklim@example.com", password: "password"}}
+    {"user_name" => {first_name: "Alex", last_name: "Klim", full_name: "Alex Klim", email: "email+alexklim@example.com", password: "password"}}
 
 user_name - this is a name, which you use in a cucumber features;
 
