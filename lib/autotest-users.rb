@@ -43,7 +43,11 @@ module Autotest
 
     def set_user_data(name, options = {})
       options.each do |key, value|
-        $users[name][key.to_sym] = value
+        key = key.to_sym
+        $users[name][key] = value
+        if key == :first_name or key == :last_name
+          $users[name][:full_name] = "#{$users[name][:first_name]} #{$users[name][:last_name]}"
+        end
       end
       options.values.first
     end
