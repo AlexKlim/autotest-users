@@ -61,15 +61,13 @@ module Autotest
       user[type]
     end
 
-    def current_user=(short_name)
-      if $users.nil?
-        raise "<#Autotest::Users> You should use create_user method, before 'current_user=' method."
-      end      
-      $current_user = $users[short_name]
-      $current_user
-    end
-
-    def current_user
+    def current_user(*short_name)
+      unless short_name.empty?
+        if $users.nil?
+          raise "<#Autotest::Users> You should use create_user method, before 'current_user=' method."
+        end      
+        $current_user = $users[short_name.first]
+      end    
       $current_user
     end
 
