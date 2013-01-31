@@ -41,6 +41,15 @@ module Autotest
       $users[name]
     end
 
+    def user_data(name, param)
+      value = if param.kind_of? Hash
+                set_user_data(name, param)
+              else
+                get_user_data(name, param)                
+              end
+      value
+    end
+
     def set_user_data(name, options = {})
       options.each do |key, value|
         key = key.to_sym
