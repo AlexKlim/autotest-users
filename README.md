@@ -65,7 +65,7 @@ Find user by name and set new 'key: value' into the hash.
 
 Find user by name and returned value from hash by type (:type as key for hash).
 
-    current_user=(short_name)
+    current_user(short_name)
 
 We can set current user. User which used at the moment.
 
@@ -91,7 +91,7 @@ Check created or not user with the name, return 'true' or 'false'.
     $ get_user_data('alex', :email)
     => "email+murrayhilpert@example.com"
 
-    $ curent_user = 'alex'
+    $ curent_user('alex')
     current_user[:first_name]
     => "Murray"
 
