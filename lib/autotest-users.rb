@@ -33,7 +33,7 @@ module Autotest
 
     def create_user name
       $users ||= {}
-      $users[name] ||= ActiveSupport::HashWithIndifferentAccess.new
+      $users[name] = ActiveSupport::HashWithIndifferentAccess.new
       $users[name] = Autotest::Users.default_value_for $users[name]
       Autotest::Users.post_create_block.call($users[name])
       set_user_data(name, options = {})
